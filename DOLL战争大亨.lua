@@ -88,10 +88,10 @@ local function Initialize()
     
     -- 清理旧连接
     if _G.HeadSizeConnection then
-        _G.HeadSizeConnection:Disconnect()
+        _G.HeadSizeConnection:DisConnect()
     end
     if _G.JumpConnection then
-        _G.JumpConnection:Disconnect()
+        _G.JumpConnection:DisConnect()
     end
     
     print("DOLL脚本初始化完成")
@@ -209,9 +209,6 @@ Tab2Section:Button({
     Color = Color3.fromHex("#000000"),  -- 按钮颜色
     Callback = function()
         local main = Instance.new("ScreenGui")
-local speeds = 1 -- 新增：局部变量声明
-local nowe = false -- 新增：局部变量声明
-local tpwalking = false -- 新增：局部变量声明
 local Frame = Instance.new("Frame")
 local up = Instance.new("TextButton")
 local down = Instance.new("TextButton")
@@ -357,7 +354,7 @@ Duration = 5;
 Frame.Active = true -- main = gui
 Frame.Draggable = true
 
-onof.MouseButton1Down:connect(function()
+onof.MouseButton1Down:Connect(function()
 
 	if nowe == true then
 		nowe = false
@@ -557,8 +554,8 @@ end)
 
 local tis
 
-up.MouseButton1Down:connect(function()
-	tis = up.MouseEnter:connect(function()
+up.MouseButton1Down:Connect(function()
+	tis = up.MouseEnter:Connect(function()
 		while tis do
 			wait()
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
@@ -566,17 +563,17 @@ up.MouseButton1Down:connect(function()
 	end)
 end)
 
-up.MouseLeave:connect(function()
+up.MouseLeave:Connect(function()
 	if tis then
-		tis:Disconnect()
+		tis:DisConnect()
 		tis = nil
 	end
 end)
 
 local dis
 
-down.MouseButton1Down:connect(function()
-	dis = down.MouseEnter:connect(function()
+down.MouseButton1Down:Connect(function()
+	dis = down.MouseEnter:Connect(function()
 		while dis do
 			wait()
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
@@ -584,9 +581,9 @@ down.MouseButton1Down:connect(function()
 	end)
 end)
 
-down.MouseLeave:connect(function()
+down.MouseLeave:Connect(function()
 	if dis then
-		dis:Disconnect()
+		dis:DisConnect()
 		dis = nil
 	end
 end)
@@ -600,7 +597,7 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
 end)
 
 
-plus.MouseButton1Down:connect(function()
+plus.MouseButton1Down:Connect(function()
 	speeds = speeds + 1
 	speed.Text = speeds
 	if nowe == true then
@@ -626,7 +623,7 @@ plus.MouseButton1Down:connect(function()
 		end
 	end
 end)
-mine.MouseButton1Down:connect(function()
+mine.MouseButton1Down:Connect(function()
 	if speeds == 1 then
 		speed.Text = 'cannot be less than 1'
 		wait(1)
@@ -721,7 +718,7 @@ local OutlineTransparency = 0
 local CoreGui = game:FindService("CoreGui")
 local Players = game:FindService("Players")
 local lp = Players.LocalPlayer
-local connections = {}
+local Connections = {}
 
 local Storage = Instance.new("Folder")
 Storage.Parent = CoreGui
@@ -743,7 +740,7 @@ local function Highlight(plr)
         Highlight.Adornee = plrchar
     end
 
-    connections[plr] = plr.CharacterAdded:Connect(function(char)
+    Connections[plr] = plr.CharacterAdded:Connect(function(char)
         Highlight.Adornee = char
     end)
 end
@@ -767,8 +764,8 @@ Players.PlayerRemoving:Connect(function(plr)
     if Storage[plrname] then
         Storage[plrname]:Destroy()
     end
-    if connections[plr] then
-        connections[plr]:Disconnect()
+    if Connections[plr] then
+        Connections[plr]:DisConnect()
     end
 end)
 
@@ -801,7 +798,7 @@ local Tab2InfJumpToggle = Tab2Section:Toggle({
     Callback = function(isEnabled)
         -- 先断开旧连接，避免重复绑定导致多次跳跃
         if _G.JumpConnection then
-            _G.JumpConnection:Disconnect()
+            _G.JumpConnection:DisConnect()
         end
         
         -- 开启时绑定跳跃请求事件
@@ -895,7 +892,7 @@ local Tab2Slider = Tab2Section:Slider({
     Callback = function(value)
         -- 断开旧的事件连接，避免重复执行
         if _G.HeadSizeConnection then
-            _G.HeadSizeConnection:Disconnect()
+            _G.HeadSizeConnection:DisConnect()
         end
 
         _G.HeadSize = value
@@ -1092,8 +1089,8 @@ Tab1Section:Button({
                 local gradient = Instance.new("UIGradient")
                 gradient.Rotation = 90
                 gradient.Parent = textLabel
-                local connection
-                connection = game:GetService("RunService").RenderStepped:Connect(function()
+                local Connection
+                Connection = game:GetService("RunService").RenderStepped:Connect(function()
                     local time = tick() * 0.5
                     gradient.Color = ColorSequence.new({
                         ColorSequenceKeypoint.new(0, Color3.fromHSV(time % 1, 1, 1)),
@@ -1106,7 +1103,7 @@ Tab1Section:Button({
                 end)
                 billboardGui.AncestryChanged:Connect(function()
                     if not billboardGui:IsDescendantOf(game) then
-                        if connection then connection:Disconnect() end
+                        if Connection then Connection:DisConnect() end
                     end
                 end)
                 billboardGui.Parent = head
@@ -1626,15 +1623,15 @@ Tab5Section:Button({
         end
         
         player:LoadCharacter()
-        local connection
-        connection = player.CharacterAdded:Connect(function(newCharacter)
+        local Connection
+        Connection = player.CharacterAdded:Connect(function(newCharacter)
             local newRootPart = newCharacter:WaitForChild("HumanoidRootPart", 5)
             if newRootPart then
                 wait(0.5)
                 newRootPart.CFrame = CFrame.new(deathPosition) * deathOrientation
                 deathPosition = nil
                 deathOrientation = nil
-                if connection then connection:Disconnect() end
+                if Connection then Connection:DisConnect() end
             end
         end)
         
