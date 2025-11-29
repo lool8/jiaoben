@@ -1484,15 +1484,8 @@ Tab4Section:Button({
     end
 })
 
--- 温馨提示区域
-local Tab4Section = Tab4:Section({
-    Title = "温馨提示",
-    TextSize = 16,
-    FontWeight = Enum.FontWeight.Regular
-})
-
 -- 自动打石头0（开关）
-local Tab4Toggle = Tab4Section:Toggle({
+local Tab5Toggle = Tab5Section:Toggle({
     Title = "自动打石头0",
     Desc = "建议把体型调成2",
     Default = false,
@@ -1544,7 +1537,7 @@ local Tab4Toggle = Tab4Section:Toggle({
 })
 
 -- 自动打石头10（开关）
-local Tab4Toggle = Tab4Section:Toggle({
+local Tab5Toggle = Tab5Section:Toggle({
     Title = "自动打石头10",
     Desc = "需耐久度≥10，建议体型调为2",
     Default = false,
@@ -1685,7 +1678,7 @@ local Tab5Toggle = Tab5Section:Toggle({
 -- 自动打石头5000（开关）
 local Tab5Toggle = Tab5Section:Toggle({
     Title = "自动打石头5000",
-    Desc = "需耐久度≥100",
+    Desc = "需耐久度≥5000",
     Default = false,
     Callback = function(isEnabled)
         local localPlayer = game.Players.LocalPlayer
@@ -1748,7 +1741,7 @@ local Tab5Toggle = Tab5Section:Toggle({
 -- 自动打石头150000（开关）
 local Tab5Toggle = Tab5Section:Toggle({
     Title = "自动打石头150000",
-    Desc = "需耐久度≥100",
+    Desc = "需耐久度≥150000",
     Default = false,
     Callback = function(isEnabled)
         local localPlayer = game.Players.LocalPlayer
@@ -1811,7 +1804,7 @@ local Tab5Toggle = Tab5Section:Toggle({
 -- 自动打石头400000（开关）
 local Tab5Toggle = Tab5Section:Toggle({
     Title = "自动打石头400000",
-    Desc = "需耐久度≥100",
+    Desc = "需耐久度≥400000",
     Default = false,
     Callback = function(isEnabled)
         local localPlayer = game.Players.LocalPlayer
@@ -1874,7 +1867,7 @@ local Tab5Toggle = Tab5Section:Toggle({
 -- 自动打石头100万（开关，去重）
 local Tab5Toggle = Tab5Section:Toggle({
     Title = "自动打石头100万",
-    Desc = "需耐久度≥100",
+    Desc = "需耐久度≥100万",
     Default = false,
     Callback = function(isEnabled)
         local localPlayer = game.Players.LocalPlayer
@@ -1944,7 +1937,7 @@ local Tab5Toggle = Tab5Section:Toggle({
 -- 自动打石头500万（开关）
 local Tab5Toggle = Tab5Section:Toggle({
     Title = "自动打石头500万",
-    Desc = "需耐久度≥100",
+    Desc = "需耐久度≥500万",
     Default = false,
     Callback = function(isEnabled)
         local localPlayer = game.Players.LocalPlayer
@@ -2007,7 +2000,7 @@ local Tab5Toggle = Tab5Section:Toggle({
 -- 自动打石头1000万（开关）
 local Tab5Toggle = Tab5Section:Toggle({
     Title = "自动打石头1000万",
-    Desc = "需耐久度≥100",
+    Desc = "需耐久度≥1000万",
     Default = false,
     Callback = function(isEnabled)
         local localPlayer = game.Players.LocalPlayer

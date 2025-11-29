@@ -979,224 +979,12 @@ Tab2Section:Button({
     end
 })
 
-local HttpService = game:GetService("HttpService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Plr = game:GetService("Players")
-local LP = Plr.LocalPlayer
-
--- 初始化WindUI
-local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syndromehsh/Lua/baff0bc41893a32f8e997d840241ad4b3d26ab4d/AlienX/AlienX%20Wind%203.0%20UI.txt"))()
-
-local MainWindow = WindUI:CreateWindow({
-    Title = 'AlienX<font color="#00FF00">2.0</font>/ 战争大亨|XI团队出品必是精品',
-    Icon = "rbxassetid://4483362748",
-    IconThemed = true,
-    Author = "AlienX",
-    Folder = "CloudHub",
-    Size = UDim2.fromOffset(580, 440),
-    Transparent = true,
-    Theme = "Dark",
-    User = {
-        Enabled = true,
-        Callback = function() print("clicked") end,
-        Anonymous = false
-    },
-    SideBarWidth = 200,
-    ScrollBarEnabled = true,
-})
-
-MainWindow:EditOpenButton({
-    Title = "打开脚本",
-    Icon = "monitor",
-    CornerRadius = UDim.new(0,16),
-    StrokeThickness = 4,
-    Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromHex("FF0000")),
-        ColorSequenceKeypoint.new(0.16, Color3.fromHex("FF7F00")),
-        ColorSequenceKeypoint.new(0.33, Color3.fromHex("FFFF00")),
-        ColorSequenceKeypoint.new(0.5, Color3.fromHex("00FF00")),
-        ColorSequenceKeypoint.new(0.66, Color3.fromHex("0000FF")),
-        ColorSequenceKeypoint.new(0.83, Color3.fromHex("4B0082")),
-        ColorSequenceKeypoint.new(1, Color3.fromHex("9400D3"))
-    }),
-    Draggable = true,
-})
-
--- 创建标签页
-local Tab1 = MainWindow:Tab({
-    Title = "视觉功能",
-    Icon = "bolt"
-})
-
-local Tab1Section = Tab1:Section({
-    Title = "视觉设置",
-    TextSize = 18,
-    FontWeight = Enum.FontWeight.SemiBold
-})
-
--- 视觉球体功能
-Tab1Section:Button({
-    Title = "创建视觉球体",
-    Icon = "refresh-cw",
-    Color = Color3.fromHex("#000000"), 
-    Callback = function()
-        local Part = Instance.new("Part", workspace)
-        Part.Material = Enum.Material.ForceField
-        Part.Anchored = true
-        Part.CanCollide = false
-        Part.CastShadow = false
-        Part.Shape = Enum.PartType.Ball
-        Part.Color = Color3.fromRGB(132, 0, 255)
-        Part.Transparency = 0.5
-        
-        WindUI:Notify({
-            Title = "视觉球体",
-            Content = "已创建视觉球体",
-            Icon = "bolt"
-        })
-    end
-})
-
--- 彩虹标题功能
-Tab1Section:Button({
-    Title = "添加彩虹标题",
-    Icon = "user",
-    Callback = function()
-        local function addRainbowTitleToLocalPlayer(player, titleText)
-            local function addTitleToCharacter(character)
-                local head = character:FindFirstChild("Head") or character:WaitForChild("Head")
-                local old = head:FindFirstChild("PlayerTitle")
-                if old then old:Destroy() end
-                local billboardGui = Instance.new("BillboardGui")
-                billboardGui.Name = "PlayerTitle"
-                billboardGui.Adornee = head
-                billboardGui.Size = UDim2.new(4, 0, 1, 0)
-                billboardGui.StudsOffset = Vector3.new(0, 2, 0)
-                billboardGui.AlwaysOnTop = true
-                billboardGui.MaxDistance = 1000
-                local textLabel = Instance.new("TextLabel")
-                textLabel.Size = UDim2.new(1, 0, 1, 0)
-                textLabel.BackgroundTransparency = 1
-                textLabel.Text = titleText
-                textLabel.TextScaled = true
-                textLabel.Font = Enum.Font.GothamBold
-                textLabel.TextWrapped = true
-                textLabel.Parent = billboardGui
-                local stroke = Instance.new("UIStroke")
-                stroke.Thickness = 1
-                stroke.Color = Color3.new(1, 1, 1)
-                stroke.Parent = textLabel
-                local gradient = Instance.new("UIGradient")
-                gradient.Rotation = 90
-                gradient.Parent = textLabel
-                local Connection
-                Connection = game:GetService("RunService").RenderStepped:Connect(function()
-                    local time = tick() * 0.5
-                    gradient.Color = ColorSequence.new({
-                        ColorSequenceKeypoint.new(0, Color3.fromHSV(time % 1, 1, 1)),
-                        ColorSequenceKeypoint.new(0.2, Color3.fromHSV((time + 0.2) % 1, 1, 1)),
-                        ColorSequenceKeypoint.new(0.4, Color3.fromHSV((time + 0.4) % 1, 1, 1)),
-                        ColorSequenceKeypoint.new(0.6, Color3.fromHSV((time + 0.6) % 1, 1, 1)),
-                        ColorSequenceKeypoint.new(0.8, Color3.fromHSV((time + 0.8) % 1, 1, 1)),
-                        ColorSequenceKeypoint.new(1, Color3.fromHSV(time % 1, 1, 1))
-                    })
-                end)
-                billboardGui.AncestryChanged:Connect(function()
-                    if not billboardGui:IsDescendantOf(game) then
-                        if Connection then Connection:DisConnect() end
-                    end
-                end)
-                billboardGui.Parent = head
-            end
-            local character = player.Character or player.CharacterAdded:Wait()
-            addTitleToCharacter(character)
-            player.CharacterAdded:Connect(addTitleToCharacter)
-        end
-        addRainbowTitleToLocalPlayer(LP, "AlienX VIP")
-        
-        WindUI:Notify({
-            Title = "彩虹标题",
-            Content = "已添加彩虹标题",
-            Icon = "user"
-        })
-    end
-})
-
--- 创建文本显示功能
-Tab1Section:Toggle({
-    Title = "显示信息面板",
-    Desc = "显示距离和速度信息",
-    Default = false,
-    Callback = function(isEnabled)
-        if isEnabled then
-            local BaseGui = Instance.new("ScreenGui", game.CoreGui)
-            BaseGui.Name = "BaseGui"
-
-            local TL = Instance.new("TextLabel", BaseGui)
-            TL.Name = "TL"
-            TL.Parent = BaseGui
-            TL.BackgroundColor3 = Color3.new(1, 1, 1)
-            TL.BackgroundTransparency = 1
-            TL.BorderColor3 = Color3.new(0, 0, 0)
-            TL.Position = UDim2.new(0.95, -300, 0.85, 0)
-            TL.Size = UDim2.new(0, 300, 0, 50)
-            TL.FontFace = Font.new("rbxassetid://12187370000", Enum.FontWeight.Bold)
-            TL.Text = ""
-            TL.TextColor3 = Color3.new(1, 1, 1)
-            TL.TextScaled = true
-            TL.TextSize = 14
-            TL.TextWrapped = true
-            TL.Visible = true
-            TL.RichText = true
-
-            local function rainbowColor(hue)
-                return Color3.fromHSV(hue, 1, 1)
-            end
-
-            local function updateRainbowText(distance, ballSpeed, spamRadius, minDistance)
-                local hue = (tick() * 0.1) % 1
-                local color1 = rainbowColor(hue)
-                local color2 = rainbowColor((hue + 0.3) % 1)
-                local color3 = rainbowColor((hue + 0.6) % 1)
-                local color4 = rainbowColor((hue + 0.9) % 1)
-
-                TL.Text = string.format(
-                "<font color='#%s'>distance: %s</font>\n"..
-                "<font color='#%s'>ballSpeed: %s</font>\n"..
-                "<font color='#%s'>spamRadius: %s</font>\n"..
-                "<font color='#%s'>minDistance: %s</font>",
-                color1:ToHex(), tostring(distance),
-                color2:ToHex(), tostring(ballSpeed),
-                color3:ToHex(), tostring(spamRadius),
-                color4:ToHex(), tostring(minDistance)
-                )
-            end
-            
-            -- 模拟更新数据
-            game:GetService("RunService").RenderStepped:Connect(function()
-                updateRainbowText(100, 50, 25, 10)
-            end)
-        else
-            if game.CoreGui:FindFirstChild("BaseGui") then
-                game.CoreGui.BaseGui:Destroy()
-            end
-        end
-        
-        WindUI:Notify({
-            Title = "信息面板",
-            Content = isEnabled and "✅ 已开启" or "❌ 已关闭",
-            Icon = "monitor",
-            Duration = 3
-        })
-    end 
-})
-
-local Tab2 = MainWindow:Tab({
+local Tab3 = MainWindow:Tab({
     Title = "传送功能",
     Icon = "map-pin"
 })
 
-local Tab2Section = Tab2:Section({
+local Tab3Section = Tab3:Section({
     Title = "传送设置",
     TextSize = 18,
     FontWeight = Enum.FontWeight.SemiBold
@@ -1224,7 +1012,7 @@ local Positions = {
     ["Zulu"] = CFrame.new(-4049, 65, -1334)
 }
 
-Tab2Section:Button({
+Tab3Section:Button({
     Title = "当前玩家基地",
     Icon = "home",
     Callback = function()
@@ -1236,7 +1024,7 @@ Tab2Section:Button({
     end
 })
 
-Tab2Section:Dropdown({
+Tab3Section:Dropdown({
     Title = "传送基地",
     Values = {"Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Juliet", "Kilo", "Lima", "Omega", "Romeo", "Sierra", "Tango", "Victor", "Yankee", "Zulu"},
     Value = "Alpha",
@@ -1252,12 +1040,12 @@ Tab2Section:Dropdown({
     end
 })
 
-local Tab3 = MainWindow:Tab({
+local Tab4 = MainWindow:Tab({
     Title = "自动功能",
     Icon = "settings"
 })
 
-local Tab3Section = Tab3:Section({
+local Tab4Section = Tab4:Section({
     Title = "自动设置",
     TextSize = 18,
     FontWeight = Enum.FontWeight.SemiBold
@@ -1267,7 +1055,7 @@ local Tab3Section = Tab3:Section({
 getgenv().auto = false
 getgenv().autoTeleport = false
 
-Tab3Section:Toggle({
+Tab4Section:Toggle({
     Title = "自动箱子",
     Desc = "自动收集箱子",
     Default = false,
@@ -1298,7 +1086,7 @@ Tab3Section:Toggle({
     end 
 })
 
-Tab3Section:Toggle({
+Tab4Section:Toggle({
     Title = "自动升级",
     Desc = "自动升级基地",
     Default = false,
@@ -1323,7 +1111,7 @@ Tab3Section:Toggle({
     end 
 })
 
-Tab3Section:Slider({
+Tab4Section:Slider({
     Title = "自动速度",
     Desc = "调整自动功能速度",
     Step = 1,  
@@ -1342,19 +1130,19 @@ Tab3Section:Slider({
     end
 })
 
-local Tab4 = MainWindow:Tab({
+local Tab5 = MainWindow:Tab({
     Title = "战斗功能",
     Icon = "sword"
 })
 
-local Tab4Section = Tab4:Section({
+local Tab5Section = Tab4:Section({
     Title = "战斗设置",
     TextSize = 18,
     FontWeight = Enum.FontWeight.SemiBold
 })
 
 -- 自动格挡功能
-Tab4Section:Toggle({
+Tab5Section:Toggle({
     Title = "自动格挡",
     Desc = "自动格挡攻击",
     Default = false,
@@ -1459,7 +1247,7 @@ Tab4Section:Button({
 
 -- RPG轰炸功能
 local rpgAttackActive = false
-Tab4Section:Toggle({
+Tab5Section:Toggle({
     Title = "RPG轰炸",
     Desc = "自动RPG轰炸",
     Default = false,
@@ -1494,12 +1282,12 @@ Tab4Section:Toggle({
     end 
 })
 
-local Tab5 = MainWindow:Tab({
+local Tab6 = MainWindow:Tab({
     Title = "辅助功能",
     Icon = "help-circle"
 })
 
-local Tab5Section = Tab5:Section({
+local Tab6Section = Tab6:Section({
     Title = "辅助设置",
     TextSize = 18,
     FontWeight = Enum.FontWeight.SemiBold
@@ -1507,7 +1295,7 @@ local Tab5Section = Tab5:Section({
 
 -- 无坠落伤害
 local blockFDMG = false
-Tab5Section:Toggle({
+Tab6Section:Toggle({
     Title = "无坠落伤害",
     Desc = "防止坠落伤害",
     Default = false,
@@ -1533,7 +1321,7 @@ Tab5Section:Toggle({
 })
 
 -- 删除所有门
-Tab5Section:Button({
+Tab6Section:Button({
     Title = "删除所有门",
     Icon = "door-open",
     Callback = function()
@@ -1553,7 +1341,7 @@ Tab5Section:Button({
 })
 
 -- 无CD状态
-Tab5Section:Toggle({
+Tab6Section:Toggle({
     Title = "无CD状态",
     Desc = "消除技能冷却",
     Default = false,
@@ -1594,7 +1382,7 @@ Tab5Section:Toggle({
 local deathPosition = nil
 local deathOrientation = nil
 
-Tab5Section:Button({
+Tab6Section:Button({
     Title = "原地重生",
     Icon = "refresh-cw",
     Callback = function()
