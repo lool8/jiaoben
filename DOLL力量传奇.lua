@@ -1121,7 +1121,7 @@ local Tab3Toggle = Tab3Section:Toggle({
 })
 
 -- 自动锻炼（ Toggle ）
-local TabToggle = Tab3Section:Toggle({
+local Tab3Toggle = Tab3Section:Toggle({
     Title = "自动锻炼",
     Desc = "自动装备所有锻炼工具并循环锻炼",
     Default = false,
@@ -1287,7 +1287,7 @@ local Tab4Section = Tab4:Section({
 })
 
 -- 传送到肌肉之王健身房（按钮）
-Tab4Section4:Button({
+Tab4Section:Button({
     Title = "传送到肌肉之王健身房",
     Icon = "refresh-cw",
     Color = Color3.fromHex("#000000"),
@@ -1320,7 +1320,7 @@ Tab4Section4:Button({
 })
 
 -- 传送到传说健身房（按钮）
-Tab4Section4:Button({
+Tab4Section:Button({
     Title = "传送到传说健身房",
     Icon = "refresh-cw",
     Color = Color3.fromHex("#000000"),
@@ -1353,7 +1353,7 @@ Tab4Section4:Button({
 })
 
 -- 传送到永恒健身房（按钮）
-Tab4Section4:Button({
+Tab4Section:Button({
     Title = "传送到永恒健身房",
     Icon = "refresh-cw",
     Color = Color3.fromHex("#000000"),
@@ -1386,7 +1386,7 @@ Tab4Section4:Button({
 })
 
 -- 传送到神话健身房（按钮）
-Tab4Section4:Button({
+Tab4Section:Button({
     Title = "传送到神话健身房",
     Icon = "refresh-cw",
     Color = Color3.fromHex("#000000"),
@@ -1419,7 +1419,7 @@ Tab4Section4:Button({
 })
 
 -- 传送到冰霜健身房（按钮）
-Tab4Section4:Button({
+Tab4Section:Button({
     Title = "传送到冰霜健身房",
     Icon = "refresh-cw",
     Color = Color3.fromHex("#000000"),
@@ -1452,7 +1452,7 @@ Tab4Section4:Button({
 })
 
 -- 传送到丛林健身房（按钮）
-Tab4Section4:Button({
+Tab4Section:Button({
     Title = "传送到丛林健身房",
     Icon = "refresh-cw",
     Color = Color3.fromHex("#000000"),
