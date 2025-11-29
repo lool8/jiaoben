@@ -43,7 +43,7 @@ local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/lool8/
 
 -- 2. 创建主窗口
 local MainWindow = WindUI:CreateWindow({
-    Title = "DOLL※༒", 
+    Title = "DOLL※༒/活到7天", 
     Author = "༼DOLL༽ | ᐁQ群:1058549962ᐁ",
     Folder = "CharacterControl",
     Size = UDim2.fromOffset(400, 300),

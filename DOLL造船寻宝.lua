@@ -3,7 +3,7 @@ local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/lool8/
 
 -- 2. 创建主窗口
 local MainWindow = WindUI:CreateWindow({
-    Title = "DOLL※༒/自然灾害", 
+    Title = "DOLL※༒/造船寻宝", 
     Author = "༼DOLL༽ | ᐁQ群:1058549962ᐁ",
     Folder = "CharacterControl",
     Size = UDim2.fromOffset(400, 300),
@@ -882,241 +882,251 @@ Tab2Section:Button({
 })
 
 local Tab3 = MainWindow:Tab({
-    Title = "自然灾害",
+    Title = "造船寻宝",
     Icon = "bolt"  -- 标签页图标
 })
 
 local Tab3Section = Tab3:Section({
-    Title = "黑洞合集",
+    Title = "刷金币",
     TextSize = 18,
     FontWeight = Enum.FontWeight.SemiBold
 })
 
--- 黑洞V1按钮
 Tab3Section:Button({
-    Title = "黑洞V1",
-    Icon = "refresh-cw",
-    Color = Color3.fromHex("#000000"),
-    Callback = function()
-        local success, err = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V1.lua.txt"))()
-        end)
-        if success then
-            WindUI:Notify({
-                Title = "黑洞V1",
-                Content = "✅ 已成功加载黑洞V1",
-                Icon = "black-hole"
-            })
-        else
-            WindUI:Notify({
-                Title = "加载失败",
-                Content = "❌ 黑洞V1加载出错：" .. err,
-                Icon = "x-circle"
-            })
-        end
-    end
-})
-
--- 黑洞V3按钮
-Tab3Section:Button({
-    Title = "黑洞V3",
-    Icon = "refresh-cw",
-    Color = Color3.fromHex("#000000"),
-    Callback = function()
-        local success, err = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V3.txt"))()
-        end)
-        if success then
-            WindUI:Notify({
-                Title = "黑洞V3",
-                Content = "✅ 已成功加载黑洞V3",
-                Icon = "black-hole"
-            })
-        else
-            WindUI:Notify({
-                Title = "加载失败",
-                Content = "❌ 黑洞V3加载出错：" .. err,
-                Icon = "x-circle"
-            })
-        end
-    end
-})
-
--- 黑洞V4按钮
-Tab3Section:Button({
-    Title = "黑洞V4",
-    Icon = "refresh-cw",
-    Color = Color3.fromHex("#000000"),
-    Callback = function()
-        local success, err = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V4.txt"))()
-        end)
-        if success then
-            WindUI:Notify({
-                Title = "黑洞V4",
-                Content = "✅ 已成功加载黑洞V4",
-                Icon = "black-hole"
-            })
-        else
-            WindUI:Notify({
-                Title = "加载失败",
-                Content = "❌ 黑洞V4加载出错：" .. err,
-                Icon = "x-circle"
-            })
-        end
-    end
-})
-
--- 黑洞V5按钮
-Tab3Section:Button({
-    Title = "黑洞V5",
-    Icon = "refresh-cw",
-    Color = Color3.fromHex("#000000"),
-    Callback = function()
-        local success, err = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V5.txt"))()
-        end)
-        if success then
-            WindUI:Notify({
-                Title = "黑洞V5",
-                Content = "✅ 已成功加载黑洞V5",
-                Icon = "black-hole"
-            })
-        else
-            WindUI:Notify({
-                Title = "加载失败",
-                Content = "❌ 黑洞V5加载出错：" .. err,
-                Icon = "x-circle"
-            })
-        end
-    end
-})
-
--- 黑洞V6按钮
-Tab3Section:Button({
-    Title = "黑洞V6",
-    Icon = "refresh-cw",
-    Color = Color3.fromHex("#000000"),
-    Callback = function()
-        local success, err = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V6.txt"))()
-        end)
-        if success then
-            WindUI:Notify({
-                Title = "黑洞V6",
-                Content = "✅ 已成功加载黑洞V6",
-                Icon = "black-hole"
-            })
-        else
-            WindUI:Notify({
-                Title = "加载失败",
-                Content = "❌ 黑洞V6加载出错：" .. err,
-                Icon = "x-circle"
-            })
-        end
-    end
-})
-
-Tab3Section:Button({
-    Title = "删除暴风雪 沙尘暴",
-    Icon = "refresh-cw",
+    Title = "自动刷金币",
+    Icon = "bolt",
     Color = Color3.fromHex("#000000"), 
     Callback = function()
-        game.Players.LocalPlayer.PlayerGui.BlizzardGui:destroy()
-		game.Players.LocalPlayer.PlayerGui.SandStormGui:destroy()
+        local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local positions = {
+    Vector3.new(-59.20, 0.57, 1182.52),
+    Vector3.new(-54.12, 8.71, 1689.17),
+    Vector3.new(-41.68, 3.59, 2519.15),
+    Vector3.new(-53.87, 32.09, 3179.87),
+    Vector3.new(-60.09, 14.87, 4018.43),
+    Vector3.new(-75.24, 20.15, 4773.91),
+    Vector3.new(-61.26, 16.50, 5534.33),
+    Vector3.new(-58.33, 14.65, 6296.06),
+    Vector3.new(-52.90, 13.00, 7157.79),
+    Vector3.new(-48.33, 26.10, 7850.43),
+    Vector3.new(-64.59, 23.17, 8472.87),
+    Vector3.new(-47.24, -333.20, 8726.69),
+    Vector3.new(-57.57, -353.98, 9359.17),
+    Vector3.new(-58.00, -354.70, 9490.83)
+}
+
+for _, pos in ipairs(positions) do
+    local startTime = tick()
+    
+    -- 在该坐标固定1.5秒钟
+    while tick() - startTime < 1.5 do
+        humanoidRootPart.CFrame = CFrame.new(pos)
+        task.wait() -- 每帧传送一次以确保位置固定
+    end
+    
+    -- 可选：短暂等待后再移动到下一个坐标
+    task.wait(0.1)
+end
         WindUI:Notify({
-            Title = "删除成功",
-            Content = "👍",
+            Title = "成功刷完一次✅",
+            Content = "小提示✅",
             Icon = "bolt"
         })
     end
 })
 
--- 投票地图（开关）
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+
+-- 坐标列表
+local positions = {
+    Vector3.new(-59.20, 0.57, 1182.52),
+    Vector3.new(-54.12, 8.71, 1689.17),
+    Vector3.new(-41.68, 3.59, 2519.15),
+    Vector3.new(-53.87, 32.09, 3179.87),
+    Vector3.new(-60.09, 14.87, 4018.43),
+    Vector3.new(-75.24, 20.15, 4773.91),
+    Vector3.new(-61.26, 16.50, 5534.33),
+    Vector3.new(-58.33, 14.65, 6296.06),
+    Vector3.new(-52.90, 13.00, 7157.79),
+    Vector3.new(-48.33, 26.10, 7850.43),
+    Vector3.new(-64.59, 23.17, 8472.87),
+    Vector3.new(-47.24, -333.20, 8726.69),
+    Vector3.new(-57.57, -353.98, 9359.17),
+    Vector3.new(-58.00, -354.70, 9490.83)
+}
+
+local isTeleporting = false
+
 local Tab3Toggle = Tab3Section:Toggle({
-    Title = "投票地图",
-    Desc = "显示/隐藏地图投票页面",
+    Title = "自动刷金币［自动版］",
+    Desc = "这是凭运气中途可能死亡👀",
     Default = false,
     Callback = function(isEnabled)
+        isTeleporting = isEnabled
+        
         WindUI:Notify({
-            Title = "投票地图",
-            Content = isEnabled and "✅ 已显示投票页面" or "❌ 已隐藏投票页面",
+            Title = "自动传送",
+            Content = isEnabled and "✅ 已开启" or "❌ 已关闭",
             Icon = "bolt",
             Duration = 3
         })
-
-        local localPlayer = game.Players.LocalPlayer
-        local mapVotePage = localPlayer.PlayerGui:FindFirstChild("MainGui") and localPlayer.PlayerGui.MainGui:FindFirstChild("MapVotePage")
-        if mapVotePage then
-            mapVotePage.Visible = isEnabled
-        else
-            WindUI:Notify({
-                Title = "错误",
-                Content = "未找到投票页面组件！",
-                Icon = "bolt",
-                Duration = 3
-            })
-        end
-    end
-})
-
--- 在水上行走（开关）
-local Tab3Toggle = Tab3Section:Toggle({
-    Title = "在水上行走",
-    Desc = "开启后可在水面站立，关闭恢复默认",
-    Default = false,
-    Callback = function(isEnabled)
-        WindUI:Notify({
-            Title = "在水上行走",
-            Content = isEnabled and "✅ 已开启（水面可站立）" or "❌ 已关闭（恢复默认）",
-            Icon = "bolt",
-            Duration = 3
-        })
-
-        local waterLevel = game.Workspace:FindFirstChild("WaterLevel")
-        if waterLevel then
-            waterLevel.CanCollide = isEnabled
-            waterLevel.Size = isEnabled and Vector3.new(5000, 1, 5000) or Vector3.new(10, 1, 10)
-        else
-            WindUI:Notify({
-                Title = "错误",
-                Content = "未找到水面组件（WaterLevel）！",
-                Icon = "bolt",
-                Duration = 3
-            })
-        end
-    end
-})
-
--- 删除坠落伤害（开关）
-local Tab3Toggle = Tab3Section:Toggle({
-    Title = "删除坠落伤害",
-    Desc = "自动销毁坠落伤害脚本，避免掉血",
-    Default = false,
-    Callback = function(isEnabled)
-        WindUI:Notify({
-            Title = "删除坠落伤害",
-            Content = isEnabled and "✅ 已开启（无坠落伤害）" or "❌ 已关闭（恢复坠落伤害）",
-            Icon = "bolt",
-            Duration = 3
-        })
-
-        _G.NoFallDamage = isEnabled
+        
         if isEnabled then
+            -- 开启时启动循环传送
             task.spawn(function()
-                while _G.NoFallDamage do
-                    task.wait(0.5)
-                    local localPlayer = game.Players.LocalPlayer
-                    local character = localPlayer.Character
-                    if character then
-                        local fallDamageScript = character:FindFirstChild("FallDamageScript")
-                        if fallDamageScript then
-                            fallDamageScript:Destroy()
+                while isTeleporting do
+                    local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+                    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+                    
+                    -- 循环传送所有坐标
+                    for _, pos in ipairs(positions) do
+                        if not isTeleporting then break end -- 检查是否关闭
+                        
+                        local startTime = tick()
+                        while tick() - startTime < 1.5 and isTeleporting do
+                            humanoidRootPart.CFrame = CFrame.new(pos)
+                            task.wait()
                         end
+                        
+                        if not isTeleporting then break end -- 再次检查是否关闭
+                        task.wait(0.1)
+                    end
+                    
+                    -- 如果仍然开启，继续下一轮循环
+                    if isTeleporting then
+                        WindUI:Notify({
+                            Title = "自动传送",
+                            Content = "🔁 开始新一轮传送循环",
+                            Icon = "refresh",
+                            Duration = 2
+                        })
                     end
                 end
             end)
         end
+    end 
+})
+
+Tab3Section:Button({
+    Title = "飞车",
+    Icon = "bolt",
+    Color = Color3.fromHex("#000000"), 
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/63T0fkBm"))()
+        WindUI:Notify({
+            Title = "飞车开启成功✅",
+            Content = "坐上载具能同载具一起飞",
+            Icon = "bolt"
+        })
+    end
+})
+
+local Tab3Section = Tab3:Section({
+    Title = "传送",
+    TextSize = 18,
+    FontWeight = Enum.FontWeight.SemiBold
+})
+
+Tab3Section:Button({
+    Title = "传送至紫队",
+    Icon = "bolt",
+    Color = Color3.fromHex("#000000"), 
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new( 377.18,  -9.17,  647.20)
+        WindUI:Notify({
+            Title = "已传送至紫队✅",
+            Content = "小提示✅",
+            Icon = "bolt"
+        })
+    end
+})
+
+Tab3Section:Button({
+    Title = "传送至黄队",
+    Icon = "bolt",
+    Color = Color3.fromHex("#000000"), 
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new( -483.94,  -9.17,  639.88)
+        WindUI:Notify({
+            Title = "已传送至黄队✅",
+            Content = "小提示✅",
+            Icon = "bolt"
+        })
+    end
+})
+
+Tab3Section:Button({
+    Title = "传送至蓝队",
+    Icon = "bolt",
+    Color = Color3.fromHex("#000000"), 
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new( 375.78,  -9.17,  301.21)
+        WindUI:Notify({
+            Title = "已传送至蓝队✅",
+            Content = "小提示✅",
+            Icon = "bolt"
+        })
+    end
+})
+
+Tab3Section:Button({
+    Title = "传送至绿队",
+    Icon = "bolt",
+    Color = Color3.fromHex("#000000"), 
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new( -483.14,  -9.17,  293.13)
+        WindUI:Notify({
+            Title = "已传送至绿队✅",
+            Content = "小提示✅",
+            Icon = "bolt"
+        })
+    end
+})
+
+Tab3Section:Button({
+    Title = "传送至红队",
+    Icon = "bolt",
+    Color = Color3.fromHex("#000000"), 
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new( 375.27,  -9.17,  -64.94)
+        WindUI:Notify({
+            Title = "已传送至红队✅",
+            Content = "小提示✅",
+            Icon = "bolt"
+        })
+    end
+})
+
+Tab3Section:Button({
+    Title = "传送至黑队",
+    Icon = "bolt",
+    Color = Color3.fromHex("#000000"), 
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new( -483.38,  -9.17,  -69.95)
+        WindUI:Notify({
+            Title = "已传送至黑队✅",
+            Content = "小提示✅",
+            Icon = "bolt"
+        })
+    end
+})
+
+Tab3Section:Button({
+    Title = "传送至白队",
+    Icon = "bolt",
+    Color = Color3.fromHex("#000000"), 
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new( -49.86,  -9.17,  -497.90)
+        WindUI:Notify({
+            Title = "已传送至白队✅",
+            Content = "小提示✅",
+            Icon = "bolt"
+        })
     end
 })
 
